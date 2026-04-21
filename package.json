@@ -1,0 +1,14 @@
+{
+  "name": "lintel-web",
+  "version": "0.1.0",
+  "description": "Landing page for Lintel — macOS window zone manager",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

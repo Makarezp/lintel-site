@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Lintel logomark: two stacked horizontal rectangles suggesting screen zones -->
+  <!-- Upper zone (smaller) -->
+  <rect x="4" y="4" width="24" height="10" rx="2" fill="#6E7EFF"/>
+  <!-- Lower zone (taller) -->
+  <rect x="4" y="17" width="24" height="11" rx="2" fill="#6E7EFF" opacity="0.45"/>
+</svg>

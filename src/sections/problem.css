@@ -1,0 +1,64 @@
+/* ---- Problem → Solution section ---- */
+.problem {
+  padding-block: var(--space-24);
+  /* Replace hard border-top with a gradient fade — breaks the metronome */
+  border-top: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-surface-raised) 70%, var(--color-bg)) 0%,
+    var(--color-bg) 18%
+  );
+}
+
+.problem__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .problem__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+}
+
+.problem__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.problem__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-2);
+}
+
+.problem__h2 {
+  /* Inherits normalized h2 scale from base.css */
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+.problem__body {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 42ch;
+}
+
+/* Solution side accent */
+.problem__block--solution .problem__h2 {
+  color: var(--color-text);
+}
+
+.problem__block--solution .problem__label {
+  color: var(--color-accent);
+}

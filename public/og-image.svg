@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0E0F11"/>
+
+  <!-- macOS window frame -->
+  <rect x="80" y="80" width="800" height="460" rx="12" fill="#161719" stroke="#2A2C30" stroke-width="1.5"/>
+
+  <!-- Title bar -->
+  <rect x="80" y="80" width="800" height="40" rx="12" fill="#1E2024"/>
+  <rect x="80" y="108" width="800" height="12" fill="#1E2024"/>
+
+  <!-- Traffic lights -->
+  <circle cx="116" cy="100" r="6" fill="#FF5F57"/>
+  <circle cx="136" cy="100" r="6" fill="#FFBD2E"/>
+  <circle cx="156" cy="100" r="6" fill="#28C840"/>
+
+  <!-- Left zone background -->
+  <rect x="80" y="120" width="320" height="420" fill="#0E0F11"/>
+
+  <!-- Right zone background -->
+  <rect x="400" y="120" width="480" height="420" fill="#161719"/>
+
+  <!-- Divider line -->
+  <rect x="396" y="120" width="2" height="420" fill="#6E7EFF" opacity="0.6"/>
+
+  <!-- Divider grip handle -->
+  <rect x="391" y="314" width="12" height="32" rx="6" fill="#2A2C30"/>
+  <rect x="395" y="322" width="4" height="2" rx="1" fill="#6E7EFF" opacity="0.8"/>
+  <rect x="395" y="328" width="4" height="2" rx="1" fill="#6E7EFF" opacity="0.8"/>
+  <rect x="395" y="334" width="4" height="2" rx="1" fill="#6E7EFF" opacity="0.8"/>
+
+  <!-- Left zone: pinned label -->
+  <rect x="96" y="136" width="50" height="16" rx="4" fill="#6E7EFF" opacity="0.15"/>
+  <text x="104" y="148" font-family="-apple-system, BlinkMacSystemFont, monospace" font-size="9" fill="#6E7EFF" letter-spacing="0.06em">PINNED</text>
+
+  <!-- Left zone: terminal block -->
+  <rect x="96" y="164" width="288" height="88" rx="6" fill="#0A0B0D"/>
+  <text x="108" y="184" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#4F5FCC">$</text>
+  <text x="120" y="184" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#8A8A87"> claude --help</text>
+  <text x="108" y="202" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#5A5A57">Claude Code v1.2.4</text>
+  <text x="108" y="220" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#5A5A57">Running agent loop...</text>
+  <rect x="108" y="232" width="6" height="12" rx="1" fill="#6E7EFF" opacity="0.7"/>
+
+  <!-- Left zone: second terminal chunk -->
+  <rect x="96" y="268" width="288" height="52" rx="6" fill="#0A0B0D"/>
+  <text x="108" y="290" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#4F5FCC">$</text>
+  <text x="120" y="290" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#8A8A87"> git status</text>
+  <text x="108" y="308" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#5A5A57">nothing to commit</text>
+
+  <!-- Right zone: window rectangles -->
+  <rect x="420" y="140" width="420" height="200" rx="8" fill="#1E2024" stroke="#2A2C30" stroke-width="1"/>
+  <rect x="420" y="140" width="420" height="28" rx="8" fill="#2A2C30"/>
+  <rect x="420" y="156" width="420" height="12" fill="#2A2C30"/>
+  <circle cx="436" cy="154" r="4" fill="#3A3C40"/>
+  <circle cx="450" cy="154" r="4" fill="#3A3C40"/>
+  <circle cx="464" cy="154" r="4" fill="#3A3C40"/>
+
+  <!-- Right zone inner content lines -->
+  <rect x="436" y="186" width="180" height="8" rx="2" fill="#3A3C40"/>
+  <rect x="436" y="202" width="280" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="436" y="216" width="240" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="436" y="230" width="200" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="436" y="252" width="100" height="24" rx="4" fill="#6E7EFF" opacity="0.25"/>
+
+  <!-- Second right window, offset -->
+  <rect x="444" y="364" width="380" height="148" rx="8" fill="#161719" stroke="#2A2C30" stroke-width="1"/>
+  <rect x="444" y="364" width="380" height="28" rx="8" fill="#1E2024"/>
+  <rect x="444" y="380" width="380" height="12" fill="#1E2024"/>
+  <circle cx="460" cy="378" r="4" fill="#2A2C30"/>
+  <circle cx="474" cy="378" r="4" fill="#2A2C30"/>
+  <circle cx="488" cy="378" r="4" fill="#2A2C30"/>
+  <rect x="460" y="406" width="220" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="460" y="420" width="300" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="460" y="434" width="260" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="460" y="448" width="180" height="6" rx="2" fill="#2A2C30"/>
+  <rect x="460" y="474" width="80" height="20" rx="4" fill="#6E7EFF" opacity="0.2"/>
+
+  <!-- Right side content copy text -->
+  <text x="980" y="220" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="36" font-weight="700" fill="#EDEDEB" text-anchor="middle" letter-spacing="-1">Lintel</text>
+  <text x="980" y="258" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" fill="#8A8A87" text-anchor="middle">Window zones that stay put.</text>
+  <text x="980" y="290" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#5A5A57" text-anchor="middle">macOS menu bar utility</text>
+  <rect x="920" y="318" width="120" height="36" rx="6" fill="#6E7EFF"/>
+  <text x="980" y="341" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Download</text>
+</svg>

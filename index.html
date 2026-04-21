@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lintel — macOS Window Manager for Focused Work</title>
+    <meta name="description" content="Lintel pins your apps to persistent screen zones and keeps them there. A lightweight menu bar utility built for developers running local AI agents and terminals." />
+
+    <meta name="theme-color" content="#6E7EFF" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lintel — Window zones that stay put." />
+    <meta property="og:description" content="A native macOS menu bar utility that snaps windows into persistent zones and enforces their position. Built for AI agent workflows. Free download." />
+    <meta property="og:image" content="./og-image.svg" />
+    <meta property="og:image:alt" content="Lintel menu bar app showing a vertically divided screen with a terminal pinned to the left zone." />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+
+    <script type="module" src="./src/main.js"></script>
+
+    <style>
+      /* Scroll-reveal baseline — elements start invisible, animate in.
+         Duration 420ms, 24px translate, spring easing per critique directive 9. */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Skip link -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- Nav -->
+    <header class="site-nav" role="banner">
+      <div class="container site-nav__inner">
+        <a href="/" class="site-nav__wordmark" aria-label="Lintel home">Lintel</a>
+        <!-- Nav CTA: compact pill (btn-ghost + site-nav__cta) — whispers while hero shouts -->
+        <a
+          href="https://github.com/Makarezp/lintel-releases/releases/latest"
+          class="btn btn-ghost site-nav__cta"
+          rel="noopener"
+          aria-label="Download Lintel for macOS"
+        >Download</a>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main id="main">
+
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="container hero__inner">
+
+          <!-- Text -->
+          <div class="hero__text">
+            <span class="hero__eyebrow">macOS menu bar utility</span>
+            <!-- Final two words wrapped in accent span per directive 2 -->
+            <h1 class="hero__h1" id="hero-heading">Window zones that <span class="hero__h1-accent">stay put.</span></h1>
+            <p class="hero__subtitle">Lintel pins your apps to defined screen areas and holds them there — even when other windows maximize, full-screen, or restack.</p>
+            <div class="hero__actions">
+              <a
+                href="https://github.com/Makarezp/lintel-releases/releases/latest"
+                class="btn btn-primary btn-primary--large"
+                rel="noopener"
+              >Download for macOS</a>
+              <a
+                href="https://github.com/Makarezp/lintel-releases"
+                class="btn btn-ghost"
+                rel="noopener"
+              >View on GitHub</a>
+            </div>
+            <p class="hero__version">v1.0 Beta · Apr 2026</p>
+          </div>
+
+          <!-- Visual -->
+          <div class="hero__visual">
+            <!--
+              Hero mock: redesigned per directive 5.
+              Left zone: one taller terminal (fills ~75% height) with blinking cursor.
+              Right zone: one recognizable Finder-style window with sidebar + file list.
+              Story: "anchored agent terminal ↔ normal floating app".
+
+              Traffic-light dots (#FF5F57 / #FFBD2E / #28C840) are intentionally
+              hard-coded — they are macOS platform-identity colors, not brand tokens.
+              Tokenizing them would weaken the "authentic macOS window" signal.
+
+              Zone fills use --mock-zone-left / --mock-zone-right CSS vars defined
+              in hero.css, with explicit light-mode overrides for distinct contrast.
+            -->
+            <svg
+              class="hero__mock"
+              viewBox="0 0 560 380"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Schematic of Lintel: a macOS window split into two zones by a vertical divider. Left zone shows a pinned terminal pane; right zone shows a Finder window."
+            >
+              <!-- Window frame -->
+              <rect x="1" y="1" width="558" height="378" rx="11" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
+
+              <!-- Title bar -->
+              <rect x="1" y="1" width="558" height="38" rx="11" fill="var(--color-surface-raised)"/>
+              <rect x="1" y="27" width="558" height="12" fill="var(--color-surface-raised)"/>
+
+              <!-- Traffic light dots — hard-coded macOS platform identity, not brand tokens -->
+              <circle cx="24" cy="20" r="5.5" fill="#FF5F57"/>
+              <circle cx="42" cy="20" r="5.5" fill="#FFBD2E"/>
+              <circle cx="60" cy="20" r="5.5" fill="#28C840"/>
+
+              <!-- Window title -->
+              <text x="280" y="24" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif" font-size="11" font-weight="500" fill="currentColor" opacity="0.4" text-anchor="middle">Finder — Desktop</text>
+
+              <!-- Left zone background (uses CSS var for light/dark contrast) -->
+              <rect x="1" y="39" width="222" height="339" fill="var(--mock-zone-left)"/>
+
+              <!-- Right zone background (uses CSS var for light/dark contrast) -->
+              <rect x="223" y="39" width="336" height="339" fill="var(--mock-zone-right)"/>
+
+              <!-- Divider line -->
+              <rect x="220" y="39" width="2" height="339" fill="var(--color-accent)" opacity="0.5"/>
+
+              <!-- Divider grip handle -->
+              <rect x="215" y="189" width="12" height="42" rx="6" fill="var(--color-border)"/>
+              <rect x="219" y="198" width="4" height="2" rx="1" fill="var(--color-accent)" opacity="0.7"/>
+              <rect x="219" y="206" width="4" height="2" rx="1" fill="var(--color-accent)" opacity="0.7"/>
+              <rect x="219" y="214" width="4" height="2" rx="1" fill="var(--color-accent)" opacity="0.7"/>
+              <rect x="219" y="222" width="4" height="2" rx="1" fill="var(--color-accent)" opacity="0.7"/>
+
+              <!-- Left zone: PINNED badge -->
+              <rect x="12" y="52" width="48" height="16" rx="4" fill="var(--color-accent)" opacity="0.12"/>
+              <text x="17" y="63" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="8.5" font-weight="600" fill="var(--color-accent)" letter-spacing="0.07em">PINNED</text>
+
+              <!-- Left zone: single taller terminal (~75% of zone height) -->
+              <rect x="12" y="78" width="196" height="272" rx="6" fill="var(--color-bg)" stroke="var(--color-border)" stroke-width="1"/>
+              <!-- Terminal header bar -->
+              <rect x="12" y="78" width="196" height="20" rx="6" fill="var(--color-surface-raised)"/>
+              <rect x="12" y="90" width="196" height="8" fill="var(--color-surface-raised)"/>
+              <circle cx="24" cy="88" r="3" fill="var(--color-border)"/>
+              <circle cx="34" cy="88" r="3" fill="var(--color-border)"/>
+              <circle cx="44" cy="88" r="3" fill="var(--color-border)"/>
+              <!-- Terminal prompt + output lines -->
+              <text x="20" y="115" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="var(--color-accent)">$</text>
+              <text x="30" y="115" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.6"> claude --help</text>
+              <text x="20" y="131" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.35">Claude Code v1.2.4</text>
+              <text x="20" y="147" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.35">Running agent loop...</text>
+              <text x="20" y="163" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.25">  Reading /src/main.js...</text>
+              <text x="20" y="179" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.25">  Editing tokens.css</text>
+              <text x="20" y="195" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.2">  Writing 42 lines...</text>
+              <text x="20" y="215" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="var(--color-accent)">$</text>
+              <text x="30" y="215" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.6"> git status</text>
+              <text x="20" y="231" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.35">nothing to commit</text>
+              <text x="20" y="251" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="var(--color-accent)">$</text>
+              <text x="30" y="251" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="9.5" fill="currentColor" opacity="0.45"> _</text>
+              <!-- Blinking cursor — animated via .hero__mock-cursor class in hero.css,
+                   gated by prefers-reduced-motion -->
+              <rect class="hero__mock-cursor" x="20" y="259" width="6" height="10" rx="1" fill="var(--color-accent)" opacity="0.65"/>
+
+              <!-- Right zone: ONE Finder-style window with sidebar + file list -->
+              <rect x="234" y="52" width="308" height="299" rx="8" fill="var(--color-surface-raised)" stroke="var(--color-border)" stroke-width="1"/>
+              <!-- Finder title bar -->
+              <rect x="234" y="52" width="308" height="26" rx="8" fill="var(--color-border)" opacity="0.6"/>
+              <rect x="234" y="70" width="308" height="8" fill="var(--color-border)" opacity="0.6"/>
+              <circle cx="248" cy="65" r="3.5" fill="var(--color-text-faint)" opacity="0.4"/>
+              <circle cx="260" cy="65" r="3.5" fill="var(--color-text-faint)" opacity="0.4"/>
+              <circle cx="272" cy="65" r="3.5" fill="var(--color-text-faint)" opacity="0.4"/>
+              <text x="388" y="69" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif" font-size="10" font-weight="500" fill="currentColor" opacity="0.35" text-anchor="middle">Desktop</text>
+              <!-- Sidebar -->
+              <rect x="234" y="78" width="72" height="273" fill="var(--color-surface)" opacity="0.5"/>
+              <rect x="305" y="78" width="1" height="273" fill="var(--color-border)"/>
+              <!-- Sidebar items -->
+              <rect x="242" y="92" width="8" height="8" rx="2" fill="var(--color-accent)" opacity="0.5"/>
+              <rect x="254" y="94" width="40" height="4" rx="2" fill="var(--color-text-muted)" opacity="0.3"/>
+              <rect x="242" y="110" width="8" height="8" rx="2" fill="var(--color-text-faint)" opacity="0.4"/>
+              <rect x="254" y="112" width="34" height="4" rx="2" fill="var(--color-text-muted)" opacity="0.2"/>
+              <rect x="242" y="128" width="8" height="8" rx="2" fill="var(--color-text-faint)" opacity="0.4"/>
+              <rect x="254" y="130" width="38" height="4" rx="2" fill="var(--color-text-muted)" opacity="0.2"/>
+              <rect x="242" y="146" width="8" height="8" rx="2" fill="var(--color-text-faint)" opacity="0.4"/>
+              <rect x="254" y="148" width="30" height="4" rx="2" fill="var(--color-text-muted)" opacity="0.2"/>
+              <!-- File list header -->
+              <rect x="310" y="82" width="224" height="18" fill="var(--color-surface-raised)"/>
+              <rect x="318" y="88" width="50" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.4"/>
+              <rect x="420" y="88" width="30" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.4"/>
+              <!-- File rows -->
+              <rect x="310" y="100" width="224" height="1" fill="var(--color-border)" opacity="0.5"/>
+              <!-- Row 1 (highlighted) -->
+              <rect x="310" y="101" width="224" height="22" fill="var(--color-accent)" opacity="0.08"/>
+              <rect x="318" y="108" width="12" height="10" rx="2" fill="var(--color-accent)" opacity="0.3"/>
+              <rect x="334" y="110" width="80" height="5" rx="2" fill="var(--color-text)" opacity="0.35"/>
+              <rect x="430" y="110" width="30" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+              <!-- Row 2 -->
+              <rect x="318" y="132" width="12" height="10" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+              <rect x="334" y="134" width="64" height="5" rx="2" fill="var(--color-text-muted)" opacity="0.25"/>
+              <rect x="430" y="134" width="24" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.2"/>
+              <!-- Row 3 -->
+              <rect x="318" y="152" width="12" height="10" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+              <rect x="334" y="154" width="90" height="5" rx="2" fill="var(--color-text-muted)" opacity="0.25"/>
+              <rect x="430" y="154" width="28" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.2"/>
+              <!-- Row 4 -->
+              <rect x="318" y="172" width="12" height="10" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+              <rect x="334" y="174" width="55" height="5" rx="2" fill="var(--color-text-muted)" opacity="0.25"/>
+              <rect x="430" y="174" width="20" height="5" rx="2" fill="var(--color-text-faint)" opacity="0.2"/>
+              <!-- Row 5 -->
+              <rect x="318" y="192" width="12" height="10" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+              <rect x="334" y="194" width="72" height="5" rx="2" fill="var(--color-text-muted)" opacity="0.25"/>
+              <!-- Path bar at bottom -->
+              <rect x="234" y="341" width="308" height="10" fill="var(--color-border)" opacity="0.3"/>
+              <rect x="242" y="343" width="120" height="4" rx="2" fill="var(--color-text-faint)" opacity="0.25"/>
+
+              <!-- Bottom frame close -->
+              <rect x="1" y="358" width="558" height="20" rx="11" fill="var(--color-surface)"/>
+            </svg>
+
+            <p class="hero__caption">Left zone: agent terminal. Right zone: yours. Divider: drag to set once.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Problem → Solution -->
+      <section class="problem" aria-labelledby="problem-heading">
+        <div class="container">
+          <div class="problem__grid">
+
+            <!-- Problem -->
+            <div class="problem__block" data-reveal>
+              <span class="problem__label">The problem</span>
+              <h2 class="problem__h2" id="problem-heading">Native window management was not built for this.</h2>
+              <p class="problem__body">macOS does a decent job when you are context-switching between full-screen apps. It does not help when you need one window — a terminal, an agent pane, a log viewer — to stay visible and in position while everything else moves around it. Mission Control, Stage Manager, and Split View all assume you want apps to share focus. You do not. You want one pane anchored, always.</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="problem__block problem__block--solution" data-reveal>
+              <span class="problem__label">The solution</span>
+              <h2 class="problem__h2" id="solution-heading">Lintel enforces the layout you set.</h2>
+              <p class="problem__body">Drag Lintel's divider once to split your screen into a left and right zone. Snap an app into either zone. Lintel watches that window and nudges it back into position if it drifts. No configuration files, no tiling profiles, no restart required. When you are done, drag the window past the divider and it floats free again.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="features" aria-labelledby="features-heading">
+        <div class="container">
+          <div class="features__header">
+            <span class="features__eyebrow">Features</span>
+            <h2 id="features-heading" class="sr-only">Features</h2>
+          </div>
+          <div class="features__grid">
+
+            <article class="feature-card" data-reveal>
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+              <h3 class="feature-card__h3">Set it once.</h3>
+              <p class="feature-card__body">Drag the vertical divider to your preferred split, snap an app in, and Lintel handles the rest from the menu bar — no preferences window, no config file, no learning curve.</p>
+              <p class="feature-card__sub">Lives entirely in your menu bar. One permission: Accessibility.</p>
+            </article>
+
+            <article class="feature-card" data-reveal>
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="18" rx="2"/>
+                <rect x="14" y="3" width="7" height="18" rx="2"/>
+              </svg>
+              <h3 class="feature-card__h3">Persistent space for agents.</h3>
+              <p class="feature-card__body">A Claude Code session, a terminal, or any local AI agent pane stays anchored in its zone while you maximize, full-screen, or switch focus across your other windows.</p>
+              <p class="feature-card__sub">Built specifically for developer workflows where an agent pane must always be reachable.</p>
+            </article>
+
+            <article class="feature-card" data-reveal>
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+              <h3 class="feature-card__h3">Magnetic zones, enforced.</h3>
+              <p class="feature-card__body">When a pinned window drifts — due to a window resize, a system notification, or another app restacking — Lintel detects it and snaps it back instantly.</p>
+              <p class="feature-card__sub">Drag past the divider at any time to release a window back to floating. No mode toggle required.</p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Download -->
+      <!-- Layout: 2-column with right aside (option b from directive 8).
+           Right column bullets are short factual labels from copy.md ("no installer,
+           no account, no telemetry") — not new feature claims. -->
+      <section class="download" aria-labelledby="download-heading">
+        <div class="container">
+          <!-- Single data-reveal on .download__inner — one unit, not six chips -->
+          <div class="download__inner" data-reveal>
+            <div class="download__main">
+              <h2 class="download__h2" id="download-heading">Free. Native. Ready to run.</h2>
+              <p class="download__support">Lintel is a single app bundle. No installer, no account, no telemetry. Drop it in Applications and grant Accessibility permission once.</p>
+
+              <div class="download__actions">
+                <a
+                  href="https://github.com/Makarezp/lintel-releases/releases/latest"
+                  class="btn btn-primary btn-primary--large"
+                  rel="noopener"
+                >Download for macOS</a>
+              </div>
+
+              <div class="download__smallprint">
+                <p>Requires macOS 13 or later. Apple Silicon and Intel supported.</p>
+                <p>Ad-hoc signed. On first launch, open System Settings → Privacy &amp; Security and select Open Anyway.</p>
+              </div>
+
+              <details class="gatekeeper-details" id="gatekeeper-note">
+                <summary>Why does macOS warn me on first launch?</summary>
+                <p class="gatekeeper-details__body">Lintel is not notarized through the Mac App Store. macOS Sequoia flags unnotarized apps on first open. This is expected. The app contains no background daemons and requests only Accessibility permission.</p>
+              </details>
+
+              <p class="download__autoupdate">Lintel checks for updates automatically via Sparkle. You will be prompted before anything installs.</p>
+            </div>
+
+            <!-- Right aside: factual labels consistent with copy.md -->
+            <aside class="download__aside" aria-label="What you get">
+              <p class="download__aside-title">What you get</p>
+              <ul class="download__aside-list">
+                <li class="download__aside-item">No account required</li>
+                <li class="download__aside-item">No telemetry, ever</li>
+                <li class="download__aside-item">Notarized Sparkle updates</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container site-footer__inner">
+        <nav class="site-footer__links" aria-label="Footer navigation">
+          <a
+            href="https://github.com/Makarezp/lintel-releases"
+            class="site-footer__link"
+            rel="noopener"
+          >GitHub</a>
+          <a
+            href="https://github.com/Makarezp/lintel-releases/releases"
+            class="site-footer__link"
+            rel="noopener"
+          >Releases</a>
+          <!-- Version as inline muted text — pill border removed, anchored by bullet separator -->
+          <span class="site-footer__version">· v1.0 Beta</span>
+        </nav>
+      </div>
+    </footer>
+
+    <style>
+      /* Skip link — visually hidden until focused */
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: var(--space-4);
+        padding: var(--space-2) var(--space-4);
+        background-color: var(--color-accent);
+        color: #fff;
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+        font-weight: var(--weight-medium);
+        text-decoration: none;
+        z-index: 9999;
+        transition: top var(--duration-fast) var(--ease-out);
+      }
+      .skip-link:focus {
+        top: var(--space-4);
+      }
+
+      /* Screen-reader only utility */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+    </style>
+
+  </body>
+</html>

@@ -1,0 +1,44 @@
+/* ---- Site nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.25rem;
+}
+
+.site-nav__wordmark {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+.site-nav__wordmark:hover { opacity: 0.7; }
+
+/* Nav CTA: compact pill — whispers while hero/download shout */
+.site-nav__cta {
+  font-size: var(--text-xs);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+}
+
+/* Accent-wash hover: visible in both light and dark modes */
+.site-nav__cta:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__wordmark { transition: none; }
+}
